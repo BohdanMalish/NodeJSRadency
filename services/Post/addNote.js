@@ -20,7 +20,6 @@ function addNote(req, res, next) {
   }
   else{
   data.push(temp);
-  res.send(data);
   }
   
 }
