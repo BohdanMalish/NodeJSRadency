@@ -1,28 +1,25 @@
 const data = require("../../repositories/data");
-const isValidDate=require('../../helpers/dateValidator');
-
-function isString(a){
-if(a===String(a)){
-return true;
-}
-else{
-    return false;
-}
-}
+const isValidDate = require("../../helpers/dateValidator");
 
 function addNote(req, res, next) {
-  var {id,name,dateCreated,category,context,planDate,archive} = req.body;
-  var temp=req.body;
-  
-  let idExist=data.find((el) => el.id == id);
-  if(idExist||!isString(name)||!isValidDate(dateCreated)||!isValidDate(planDate)||!isString(context)||!isString(category)||typeof(archive)!="boolean"){
+  const { id, name, dateCreated, category, context, planDate, archive } =
+    req.body;
+  const temp = req.body;
+
+  const idExist = data.find((el) => el.id == id);
+  if (
+    idExist ||
+    !typeof name === "string" ||
+    !isValidDate(dateCreated) ||
+    !isValidDate(planDate) ||
+    !typeof context === "string" ||
+    !typeof category === "string" ||
+    typeof archive != "boolean"
+  ) {
     res.status(400).json({ message: "Bad data" });
-  }
-  else{
-  data.push(temp);
+  } else {
+    data.push(temp);
   }
   res.send(data);
 }
 module.exports = addNote;
-
-

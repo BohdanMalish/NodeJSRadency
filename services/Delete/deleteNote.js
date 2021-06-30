@@ -6,6 +6,7 @@ function deleteNote(req, res, next) {
         let deleted = data.find((el) => el.id == id);
         if (deleted) {
           data = data.filter((el) => el.id != id);
+          
         } else {
           res.status(400).json({ message: "Dont exist" });
         }
